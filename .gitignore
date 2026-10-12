@@ -1,0 +1,21 @@
+# --- macOS ---
+.DS_Store
+
+# --- Obsidian: 窗口布局/缓存不进 git，避免多设备互相覆盖 ---
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache
+.obsidian/plugins/*/data.json.bak
+
+# --- Obsidian: 回收站 ---
+.trash/
+
+# --- 临时文件 ---
+*.tmp
+~$*
+
+# 注意：以下内容要同步，不要忽略
+#   .obsidian/plugins/*/data.json   ← 插件配置
+#   .obsidian/plugins/*/main.js     ← 插件本体（体积较大，如需瘦身可忽略）
+#   .obsidian/app.json / appearance.json / core-plugins.json
+#   .obsidian/community-plugins.json

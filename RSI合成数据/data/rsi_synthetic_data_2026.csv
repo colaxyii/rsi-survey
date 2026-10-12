@@ -1,0 +1,88 @@
+published,id,primary,title,first_author,subdirection,url
+2026-10-08,2610.11345v1,cs.AI,SynCo: Data Synthesis Co-Training for Self-Evolving LLMs via Multi-Agent Reinforcement Learning,Wei Yang,2 任务/环境/课程合成 | 8 领域与模态合成,https://arxiv.org/abs/2610.11345v1
+2026-10-06,2610.08093v1,cs.CL,SAGE: Semantic Anchor-Guided Evolution for Grounded Medical QA Data Synthesis,Chuan Li,8 领域与模态合成,https://arxiv.org/abs/2610.08093v1
+2026-10-02,2610.03548v1,cs.AI,Recursive Harness Self-Improvement for Frontier Reasoning Data Synthesis,Wenlong Zhang,9 其他,https://arxiv.org/abs/2610.03548v1
+2026-10-02,2610.02708v1,cs.RO,RoboChemGym: A Protocol-Driven Generative Simulation Framework for Long-Horizon Chemical Manipulation,Chenxi Li,2 任务/环境/课程合成 | 8 领域与模态合成,https://arxiv.org/abs/2610.02708v1
+2026-10-01,2610.00903v1,cs.LG,Sharpen Before You Adapt: Data-Free Entry-State Sharpening for Test-Time Reinforcement Learning,Zhanming Zhang,1 自博弈生成数据 | 3 自蒸馏与自训练 | 8 领域与模态合成,https://arxiv.org/abs/2610.00903v1
+2026-10-01,2610.01039v1,cs.CV,Bootstrapping Video Interaction Generation with Synthetic State Transitions,Jiho Jang,7 数据筛选与质量 | 8 领域与模态合成,https://arxiv.org/abs/2610.01039v1
+2026-09-29,2609.36675v1,cs.CL,Gödel Forest: Balancing Search Depth and Breadth for Data-Centric Recursive Self-Improvement,Ziqi Zhao,4 数据为中心的 RSI 基准 | 8 领域与模态合成,https://arxiv.org/abs/2609.36675v1
+2026-09-28,2609.35512v1,cs.LG,Improving Generative Model Self-Training with Geometrically Modified Outputs,Patrick Batsell,3 自蒸馏与自训练 | 6 合成数据的风险 | 8 领域与模态合成,https://arxiv.org/abs/2609.35512v1
+2026-09-28,2609.35025v1,cs.AI,AutoDataBench: Can Agents Write the Data That Feeds the Self-Improvement Loop?,Haotian Luo,2 任务/环境/课程合成 | 5 验证器与奖励合成 | 4 数据为中心的 RSI 基准 | 7 数据筛选与质量 | 8 领域与模态合成,https://arxiv.org/abs/2609.35025v1
+2026-09-27,2609.33565v1,cs.AI,Dr. Free: You Don't Need Difficulty Rewards for Self-Evolving Search Agents,Zhipeng Qian,2 任务/环境/课程合成 | 7 数据筛选与质量 | 8 领域与模态合成,https://arxiv.org/abs/2609.33565v1
+2026-09-24,2609.30063v1,cs.AI,Self-Play Pretraining with Zero Data,Aditya Cowsik,1 自博弈生成数据 | 2 任务/环境/课程合成 | 8 领域与模态合成,https://arxiv.org/abs/2609.30063v1
+2026-09-16,2609.30297v1,cs.CL,Bootstrapping Conversational Recommendation Agents At Spotify: Synthetic Data Generation and Self-Improvement Loops,Enrico Palumbo,8 领域与模态合成,https://arxiv.org/abs/2609.30297v1
+2026-09-11,2609.12353v1,cs.CL,SynthSentry: Detecting Synthetic Data Contamination in Language Model Training Data,Praveen Kumar Myakala,6 合成数据的风险 | 7 数据筛选与质量 | 8 领域与模态合成,https://arxiv.org/abs/2609.12353v1
+2026-09-07,2609.07655v2,cs.LG,Online Surrogate Repair: Decoupling High-Fidelity Feedback from Search Length in Closed-Loop Discovery,Xiaotang Feng,8 领域与模态合成,https://arxiv.org/abs/2609.07655v2
+2026-08-27,2608.26582v2,cs.LG,J-Zero: Unified Challenger--Solver--Judge Self-Evolution from Zero Data,Gyouk Chu,1 自博弈生成数据 | 5 验证器与奖励合成 | 8 领域与模态合成,https://arxiv.org/abs/2608.26582v2
+2026-08-24,2608.22847v1,cs.AI,GSAR: Goal-State-Anchor Rewards for Mobile GUI Agents with Self-Evolving Data Synthesis,Long Zhang,2 任务/环境/课程合成 | 8 领域与模态合成,https://arxiv.org/abs/2608.22847v1
+2026-08-22,2608.21871v1,cs.CL,"The Chase Is the Curriculum, the Capture Anchors the Credit: Pursuit-Evasion Self-Play for Zero-Data LLM Reasoning",Jing Yu,1 自博弈生成数据 | 2 任务/环境/课程合成 | 5 验证器与奖励合成 | 7 数据筛选与质量 | 8 领域与模态合成,https://arxiv.org/abs/2608.21871v1
+2026-08-05,2608.05144v2,cs.AI,Argus: A General-Purpose Agentic Reasoning Runtime for Long-Horizon Tasks,Boxiu Li,5 验证器与奖励合成 | 8 领域与模态合成,https://arxiv.org/abs/2608.05144v2
+2026-08-04,2608.03927v1,cs.LG,A Physics-Flavored Transformer Network for Parametrizing Contraction Dynamics of Engineered Skeletal Muscle Tissues,Mattias Luber,8 领域与模态合成,https://arxiv.org/abs/2608.03927v1
+2026-08-04,2608.03569v1,cs.AI,Adversarial Fast-Moving Real-World Domains as Test Beds for Benchmarking AI Scientist Capabilities,William Bolton,7 数据筛选与质量,https://arxiv.org/abs/2608.03569v1
+2026-08-03,2608.02480v1,stat.ML,Private Generative Bootstrap via Blocking,Jinwon Sohn,9 其他,https://arxiv.org/abs/2608.02480v1
+2026-08-02,2608.01522v1,cs.LG,Question Begets Question: Self-Evolving Curriculum for Reinforcement Fine-Tuning on Competition Mathematics,Longtian Bao,2 任务/环境/课程合成,https://arxiv.org/abs/2608.01522v1
+2026-07-30,2607.27562v1,cs.AI,DeepResearch Agent System,Yong Huang,8 领域与模态合成,https://arxiv.org/abs/2607.27562v1
+2026-07-28,2607.25886v1,cs.SE,RSIBench-Data: Benchmarking Data-Centric Research for Recursive Self-Improvement,Fanqing Meng,4 数据为中心的 RSI 基准 | 8 领域与模态合成,https://arxiv.org/abs/2607.25886v1
+2026-07-24,2607.21971v2,cs.LG,Teaching LLMs to Self-Evolve: Cultivating Core Meta-Skills with Reinforcement Learning,Shujin Wu,5 验证器与奖励合成 | 8 领域与模态合成,https://arxiv.org/abs/2607.21971v2
+2026-07-23,2607.21461v3,cs.AI,AREX: Towards a Recursively Self-Improving Agent for Deep Research,Shuqi Lu,8 领域与模态合成,https://arxiv.org/abs/2607.21461v3
+2026-07-22,2608.24909v1,cs.HC,Super Star: Towards Streaming Real-time Interactive Agents for Digital Humans,Wentao Jiang,8 领域与模态合成,https://arxiv.org/abs/2608.24909v1
+2026-07-19,2607.17043v1,cs.CL,Learning from Synthetic Data without Model Collapse in Iterative Instruction Tuning,Xiaonan Luo,3 自蒸馏与自训练 | 6 合成数据的风险 | 4 数据为中心的 RSI 基准 | 7 数据筛选与质量 | 8 领域与模态合成,https://arxiv.org/abs/2607.17043v1
+2026-07-08,2607.07318v1,cs.CL,R^3: Advertisement Compliance Rectification via Group-Relative Experience Extractor and Curriculum Reinforcement,Yuan Chen,2 任务/环境/课程合成 | 8 领域与模态合成,https://arxiv.org/abs/2607.07318v1
+2026-07-07,2607.09773v2,cs.AI,EvoCUA-1.5: Online Reinforcement Learning for Multi-turn Computer-Use Agents,Mianqiu Huang,2 任务/环境/课程合成 | 5 验证器与奖励合成 | 7 数据筛选与质量 | 8 领域与模态合成,https://arxiv.org/abs/2607.09773v2
+2026-07-06,2607.04631v1,cs.AI,Formal Disco: Scalable Open-Ended Generation of Formally Verified Programs,Gabriel Poesia,5 验证器与奖励合成 | 8 领域与模态合成,https://arxiv.org/abs/2607.04631v1
+2026-06-30,2606.31270v1,cs.CV,Learning from Failure: Inference-Time Self-Improvement for Computer-Use Agents,Xueqiao Sun,5 验证器与奖励合成 | 4 数据为中心的 RSI 基准 | 8 领域与模态合成,https://arxiv.org/abs/2606.31270v1
+2026-06-30,2606.31229v1,cs.AI,Agentic-Ideation: Sample Efficient Agentic Trajectories Synthesis for Scientific Ideation Agents,Keyu Zhao,7 数据筛选与质量 | 8 领域与模态合成,https://arxiv.org/abs/2606.31229v1
+2026-06-11,2606.13669v3,cs.AI,Agents-K1: Towards Agent-native Knowledge Orchestration,Zongsheng Cao,8 领域与模态合成,https://arxiv.org/abs/2606.13669v3
+2026-06-11,2606.12945v2,cs.AI,Learning What to Remember: A Cognitively Grounded Multi-Factor Value Model for Agentic Memory,Zhibao Chen,8 领域与模态合成,https://arxiv.org/abs/2606.12945v2
+2026-06-08,2606.09767v1,cs.CL,Data Synthesis and Parameter-Efficient Fine-Tuning for Low-Resource NMT: A Case Study on Q'eqchi' Mayan,Alexander Chulzhanov,2 任务/环境/课程合成,https://arxiv.org/abs/2606.09767v1
+2026-06-05,2606.07412v1,cs.SE,Socratic-SWE: Self-Evolving Coding Agents via Trace-Derived Agent Skills,Chuan Xiao,2 任务/环境/课程合成 | 5 验证器与奖励合成 | 8 领域与模态合成,https://arxiv.org/abs/2606.07412v1
+2026-06-03,2606.04516v1,cs.LG,GeoMin: Data-Efficient Semi-Supervised RLVR via Geometric Distribution Modeling,Guangcheng Zhu,5 验证器与奖励合成 | 6 合成数据的风险 | 7 数据筛选与质量 | 8 领域与模态合成,https://arxiv.org/abs/2606.04516v1
+2026-06-02,2606.03979v2,cs.LG,Language Models Need Sleep: Learning to Self-Modify and Consolidate Memories,Ali Behrouz,2 任务/环境/课程合成 | 3 自蒸馏与自训练 | 8 领域与模态合成,https://arxiv.org/abs/2606.03979v2
+2026-05-31,2606.01279v1,cs.AI,ANDES: Agent Native Data Evolving Synthesis Tool for Autonomous Instruction Alignment,Zhengyang Zhao,4 数据为中心的 RSI 基准 | 7 数据筛选与质量,https://arxiv.org/abs/2606.01279v1
+2026-05-29,2605.31126v1,cs.CL,Not All Synthetic Data Is Yours to Learn From,Sina Alemohammad,3 自蒸馏与自训练 | 5 验证器与奖励合成 | 8 领域与模态合成,https://arxiv.org/abs/2605.31126v1
+2026-05-29,2605.31433v1,cs.CL,SCOPE: Self-Play via Co-Evolving Policies for Open-Ended Tasks,Wai-Chung Kwan,1 自博弈生成数据 | 5 验证器与奖励合成 | 8 领域与模态合成,https://arxiv.org/abs/2605.31433v1
+2026-05-28,2605.30290v2,cs.LG,Self-Trained Verification for Training- and Test-Time Self-Improvement,Chen Henry Wu,3 自蒸馏与自训练 | 5 验证器与奖励合成 | 8 领域与模态合成,https://arxiv.org/abs/2605.30290v2
+2026-05-26,2607.00016v1,cs.IR,Libra: Training the Environment for Agentic Information Retrieval,Xuan Zhao,8 领域与模态合成,https://arxiv.org/abs/2607.00016v1
+2026-05-24,2605.24998v1,cs.CL,"Better, Faster: Harnessing Self-Improvement in Large Reasoning Models",Qihuang Zhong,3 自蒸馏与自训练 | 6 合成数据的风险 | 7 数据筛选与质量 | 8 领域与模态合成,https://arxiv.org/abs/2605.24998v1
+2026-05-22,2605.24218v1,cs.CL,QUEST: Training Frontier Deep Research Agents with Fully Synthetic Tasks,Jian Xie,2 任务/环境/课程合成 | 5 验证器与奖励合成,https://arxiv.org/abs/2605.24218v1
+2026-05-21,2605.22905v1,cs.AI,EVE-Agent: Evidence-Verifiable Self-Evolving Agents,Yamato Arai,2 任务/环境/课程合成 | 5 验证器与奖励合成 | 8 领域与模态合成,https://arxiv.org/abs/2605.22905v1
+2026-05-21,2605.23054v1,cs.CL,Model Collapse as Cultural Evolution,Dongxin Guo,3 自蒸馏与自训练 | 6 合成数据的风险 | 7 数据筛选与质量 | 8 领域与模态合成,https://arxiv.org/abs/2605.23054v1
+2026-05-17,2605.17342v1,cs.CL,Transitivity Meets Cyclicity: Explicit Preference Decomposition for Dynamic Large Language Model Alignment,Yucong Huang,1 自博弈生成数据 | 7 数据筛选与质量 | 8 领域与模态合成,https://arxiv.org/abs/2605.17342v1
+2026-05-14,2605.14392v1,cs.AI,Learning to Build the Environment: Self-Evolving Reasoning RL via Verifiable Environment Synthesis,Yucheng Shi,2 任务/环境/课程合成 | 5 验证器与奖励合成 | 7 数据筛选与质量 | 8 领域与模态合成,https://arxiv.org/abs/2605.14392v1
+2026-05-13,2605.13149v1,cs.CL,AcquisitionSynthesis: Targeted Data Generation using Acquisition Functions,Ishika Agarwal,2 任务/环境/课程合成 | 5 验证器与奖励合成 | 7 数据筛选与质量 | 8 领域与模态合成,https://arxiv.org/abs/2605.13149v1
+2026-05-11,2605.09959v1,cs.LG,G-Zero: Self-Play for Open-Ended Generation from Zero Data,Chengsong Huang,1 自博弈生成数据 | 5 验证器与奖励合成 | 7 数据筛选与质量 | 8 领域与模态合成,https://arxiv.org/abs/2605.09959v1
+2026-05-11,2605.09922v1,cs.CL,Team-Based Self-Play With Dual Adaptive Weighting for Fine-Tuning LLMs,Wu Li,1 自博弈生成数据 | 3 自蒸馏与自训练 | 7 数据筛选与质量 | 8 领域与模态合成,https://arxiv.org/abs/2605.09922v1
+2026-05-08,2605.08472v1,cs.AI,Mid-Training with Self-Generated Data Improves Reinforcement Learning in Language Models,Aswin RRV,3 自蒸馏与自训练 | 8 领域与模态合成,https://arxiv.org/abs/2605.08472v1
+2026-04-30,2604.28181v1,cs.AI,Synthetic Computers at Scale for Long-Horizon Productivity Simulation,Tao Ge,9 其他,https://arxiv.org/abs/2604.28181v1
+2026-04-21,2604.18966v2,cs.LG,Self-Improving Tabular Language Models via Iterative Reward-Guided Post-Training,Yunbo Long,8 领域与模态合成,https://arxiv.org/abs/2604.18966v2
+2026-04-19,2604.18639v1,cs.LG,Easy Samples Are All You Need: Self-Evolving LLMs via Data-Efficient Reinforcement Learning,Zhiyin Yu,3 自蒸馏与自训练 | 6 合成数据的风险 | 7 数据筛选与质量,https://arxiv.org/abs/2604.18639v1
+2026-04-18,2604.16804v4,cs.LG,AutoOR: Scalably Post-training LLMs to Autoformulate Operations Research Problems,Sumeet Ramesh Motwani,2 任务/环境/课程合成 | 8 领域与模态合成,https://arxiv.org/abs/2604.16804v4
+2026-04-15,2604.14054v2,cs.LG,$π$-Play: Multi-Agent Self-Play via Privileged Self-Distillation without External Data,Yaocheng Zhang,1 自博弈生成数据 | 2 任务/环境/课程合成 | 3 自蒸馏与自训练 | 8 领域与模态合成,https://arxiv.org/abs/2604.14054v2
+2026-04-14,2604.12223v1,cs.CL,LLM-Guided Semantic Bootstrapping for Interpretable Text Classification with Tsetlin Machines,Jiechao Gao,2 任务/环境/课程合成 | 8 领域与模态合成,https://arxiv.org/abs/2604.12223v1
+2026-04-07,2604.05336v2,cs.AI,TRACE: Capability-Targeted Agentic Training,Hangoo Kang,7 数据筛选与质量 | 8 领域与模态合成,https://arxiv.org/abs/2604.05336v2
+2026-03-31,2603.29656v1,cs.NI,"6GAgentGym: Tool Use, Data Synthesis, and Agentic Learning for Network Management",Jiao Chen,8 领域与模态合成,https://arxiv.org/abs/2603.29656v1
+2026-03-30,2603.28376v1,cs.CL,Marco DeepResearch: Unlocking Efficient Deep Research Agents via Verification-Centric Design,Bin Zhu,5 验证器与奖励合成 | 7 数据筛选与质量,https://arxiv.org/abs/2603.28376v1
+2026-03-30,2603.28407v1,cs.AI,MiroEval: Benchmarking Multimodal Deep Research Agents in Process and Outcome,Fangda Ye,8 领域与模态合成,https://arxiv.org/abs/2603.28407v1
+2026-03-18,2603.18073v1,cs.AI,Continually self-improving AI,Zitong Yang,9 其他,https://arxiv.org/abs/2603.18073v1
+2026-03-17,2603.17216v2,cs.AI,ML-AutoResearch: Training Machine Learning Research Agents with Automatically Generated Environments,Ziyang Cai,7 数据筛选与质量 | 8 领域与模态合成,https://arxiv.org/abs/2603.17216v2
+2026-03-11,2603.10505v1,cs.CL,Safe and Scalable Web Agent Learning via Recreated Websites,Hyungjoo Chae,5 验证器与奖励合成 | 8 领域与模态合成,https://arxiv.org/abs/2603.10505v1
+2026-03-10,2603.09206v1,cs.CV,MM-Zero: Self-Evolving Multi-Model Vision Language Models From Zero Data,Zongxia Li,7 数据筛选与质量 | 8 领域与模态合成,https://arxiv.org/abs/2603.09206v1
+2026-03-06,2603.06915v2,cs.CL,A Dynamic Self-Evolving Extraction System,Moin Amin-Naseri,7 数据筛选与质量 | 8 领域与模态合成,https://arxiv.org/abs/2603.06915v2
+2026-03-05,2603.05218v1,cs.AI,KARL: Knowledge Agents via Reinforcement Learning,Jonathan D. Chang,9 其他,https://arxiv.org/abs/2603.05218v1
+2026-03-04,2603.04384v3,cs.CL,AgentIR: Reasoning-Aware Retrieval for Deep Research Agents,Zijian Chen,8 领域与模态合成,https://arxiv.org/abs/2603.04384v3
+2026-03-03,2603.03524v2,cs.LG,Test-Time Meta-Adaptation with Self-Synthesis,Zeyneb N. Kaya,7 数据筛选与质量,https://arxiv.org/abs/2603.03524v2
+2026-03-01,2603.01152v2,cs.AI,DeepResearch-9K: A Challenging Benchmark Dataset of Deep-Research Agent,Tongzhou Wu,5 验证器与奖励合成 | 7 数据筛选与质量 | 8 领域与模态合成,https://arxiv.org/abs/2603.01152v2
+2026-02-27,2602.23716v1,cs.AI,ProductResearch: Training E-Commerce Deep Research Agents via Multi-Agent Synthetic Trajectory Distillation,Jiangyuan Wang,7 数据筛选与质量,https://arxiv.org/abs/2602.23716v1
+2026-02-26,2602.22675v2,cs.CL,"Search More, Think Less: Rethinking Long-Horizon Agentic Search for Efficiency and Generalization",Qianben Chen,9 其他,https://arxiv.org/abs/2602.22675v2
+2026-02-24,2602.21320v1,cs.LG,Tool-R0: Self-Evolving LLM Agents for Tool-Learning from Zero Data,Emre Can Acikgoz,1 自博弈生成数据 | 2 任务/环境/课程合成 | 8 领域与模态合成,https://arxiv.org/abs/2602.21320v1
+2026-02-16,2602.15257v3,cs.CV,How to Train Your Long-Context Visual Document Model,Austin Veselka,7 数据筛选与质量 | 8 领域与模态合成,https://arxiv.org/abs/2602.15257v3
+2026-02-15,2602.14295v1,cs.LG,Machine Learning as a Tool (MLAT): A Framework for Integrating Statistical ML Models as Callable Tools within LLM Agent Workflows,Edwin Chen,9 其他,https://arxiv.org/abs/2602.14295v1
+2026-02-15,2602.14093v1,cs.AI,GUI-GENESIS: Automated Synthesis of Efficient Environments with Verifiable Rewards for GUI Agent Post-Training,Yuan Cao,2 任务/环境/课程合成 | 5 验证器与奖励合成 | 8 领域与模态合成,https://arxiv.org/abs/2602.14093v1
+2026-02-11,2602.11089v2,cs.CL,DataChef: Cooking Up Optimal Data Recipes for LLM Adaptation via Reinforcement Learning,Yicheng Chen,7 数据筛选与质量,https://arxiv.org/abs/2602.11089v2
+2026-02-03,2602.02979v3,cs.CL,CPMobius: Iterative Coach-Player Reasoning for Data-Free Reinforcement Learning,Ran Li,1 自博弈生成数据 | 8 领域与模态合成,https://arxiv.org/abs/2602.02979v3
+2026-02-01,2602.01137v1,cs.LG,Self-Generative Adversarial Fine-Tuning for Large Language Models,Shiguang Wu,1 自博弈生成数据 | 5 验证器与奖励合成,https://arxiv.org/abs/2602.01137v1
+2026-01-30,2601.22607v3,cs.AI,From Self-Evolving Synthetic Data to Verifiable-Reward RL: Post-Training Multi-turn Interactive Tool-Using Agents,Jiaxuan Gao,5 验证器与奖励合成 | 7 数据筛选与质量 | 8 领域与模态合成,https://arxiv.org/abs/2601.22607v3
+2026-01-29,2601.21716v1,cs.CV,DreamActor-M2: Universal Character Image Animation via Spatiotemporal In-Context Learning,Mingshuang Luo,8 领域与模态合成,https://arxiv.org/abs/2601.21716v1
+2026-01-11,2601.06786v1,cs.CL,EpiCaR: Knowing What You Don't Know Matters for Better Reasoning in LLMs,Jewon Yeom,3 自蒸馏与自训练 | 6 合成数据的风险 | 8 领域与模态合成,https://arxiv.org/abs/2601.06786v1
+2026-01-08,2601.05184v1,cs.AI,Observations and Remedies for Large Language Model Bias in Self-Consuming Performative Loop,Yaxuan Wang,3 自蒸馏与自训练,https://arxiv.org/abs/2601.05184v1
+2026-01-06,2601.02907v2,cs.CL,Beyond the Black Box: A Survey on the Theory and Mechanism of Large Language Models,Zeyu Gan,7 数据筛选与质量 | 8 领域与模态合成,https://arxiv.org/abs/2601.02907v2

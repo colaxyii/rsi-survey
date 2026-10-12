@@ -1,0 +1,55 @@
+keyword,title,author,date,likes,note
+自动化科研 agent,上交大：Claude Code在你睡觉时做“靠谱”科研，两篇论文被AI顶会接收,大模型奥特曼,05-07,3321,ARIS系统；跨模型协作；AI顶会接收
+self-improving agent,硅谷正在疯狂押注 Self-Improve Agent,机器之心,05-22,1202,产业综述
+self-evolving agent,Agent自我进化论文泛滥了，求推荐必看论文,幸运降临中,09-06,1179,求推荐帖（评论区是论文清单）
+RSI 论文,分享几个最近 RSI 值得读的 blog 和 paper,picrrrew,09-09,672,论文与博客书单
+递归自我改进,我们做了一张 RSI 开源学习地图,Yaowei Zheng,09-08,539,开源学习地图
+RSI 自我进化,读 RSI 系列论文有感,大雨中笑栗行,09-11,513,系列论文阅读笔记
+self-improving agent,斯坦福CS329A：AI如何自进化，我先学完啦,刘铁柱,09-15,266,Stanford CS329A 课程笔记
+自我进化 论文,Qwen最新论文：模型如何靠Skill实现自我进化,小鲤鱼找妈妈,07-29,251,Skill Self-Play
+RSI 论文,近期的RSI论文梳理,深联DeepLink,09-20,218,概念综述/实现范式/评测三段式
+self-improving agent,斯坦福讲透了：AI为什么要学会自我改进,机器之心,08-04,211,CS329A 解读
+RSI 自我进化,基于循环自我进化（RSI）的记忆框架AutoMem,周杰-华东师大,08-18,210,AutoMem 论文
+self-evolving agent,EMNLP 2026｜MemPro：让 Agent 的记忆系统学会自我进化,小红书技术REDtechnotes,09-17,205,MemPro
+RSI 自我进化,清北斯坦福联合发布最新自进化 agent,AgentAlpha,09-11,172,MetaRSI-v1
+RSI 自我进化,RSI：不训练不微调，Agent 在新环境自我进化,树枝愈合,09-21,169,RSIAgent
+递归自我改进,改变我对“递归自我改进”（RSI）认知的两小时,AI Dance,08-14,164,深度长文
+递归自我改进,RSIAgent：让Agent在新环境中自我进化,WebAgentLab,09-16,157,官方解读
+RSI 自我进化,RSI不同发展分支的可行性,牛来,09-18,146,分支路线讨论
+self-evolving agent,Google让推荐系统自己进化,小酒,09-13,96,Self-Evolving Recommendation
+RSI 自我进化,搞怪九宫格→RSI入门理解,小满,6天前,72,RSI 九宫格科普
+world model 自我进化,Motus 2：迈向闭环自进化世界模型,李磊NLP,09-14,70,Motus2
+自动化科研 agent,谷歌：全自动科研范式 ScientistTwo,大模型任我行,09-27,65,ScientistTwo
+自动化科研 agent,AutoResearch 的四种常见循环,中科数特AI科技,05-16,59,AutoResearch 框架
+self-evolving agent,谷歌：让智能体自带“说明书”并自我进化,大模型任我行,2天前,57,技能自生成
+RSI 自我进化,Designer-RSI：拥有真实用户该怎么进化agent,罗德岛第一狠人,09-22,55,Designer-RSI
+AI 自我进化,AI的自我进化，可能只是一场自我欺骗,美国的牛粪博士,09-24,48,质疑视角（视频）
+自我进化 论文,Agent自进化，如何避免越改越错？,Muyiii,3天前,46,TimeEvo 失败驱动自进化
+world model 自我进化,世界模型居然能自我进化！,代码熊大模型论文速递,07-03,44,Self-Evolving World Models for LLM Agent Planning / ICML 2026
+AI 自我进化,字节跳动：大模型能靠模糊目标自进化吗,AI魔法屋,09-04,41,Aspire
+AI 自我进化,中国RSI公司全景：谁在押注AI自我进化？,Jessica的数字生命,09-09,40,产业地图（近8000字）
+自动化科研 agent,复杂EHR场景下医疗Agent的能力边界,失重外太空,14小时前,40,EHR-Complex / EMNLP 2026
+self-improving agent,斯坦福 CS329A 自动优化 AI 课程全公开,AI启蒙小伙伴,09-27,42,课程资源
+world model 自我进化,RISE：通过世界模型自进化 Robot Policy,GaoE,06-03,30,RISE
+RSI 自我进化,看懂RSI：AI如何自我进化,向旷野泛化,09-05,46,DGM 时代 RSI 观察
+递归自我改进,一篇文章懂 Agent Harness 递归自我改进（上）,CrazyAllen,07-19,29,Harness 自改进长文
+AI 自我进化,AI已经开始RSI自我进化了,olabalaba,09-20,28,Anthropic/OpenAI/Google/智谱进展
+AI 自我进化,RSI观察笔记（一）：AI到底怎样自我进化？,Laolao（捞捞）,09-08,25,观察笔记
+自动化科研 agent,Google ScientistTwo：让Agent参与真实科研,Yaowei Zheng,1天前,26,ScientistTwo 解读
+递归自我改进,什么是递归自我改进（RSI）？,新物种日记,09-16,22,概念科普
+递归自我改进,递归自我改进（RSI）将如何实现,LLM-insights,07-09,22,路线分析
+递归自我改进,【文章】Harness Engineering for Self-Improvement,LLM-insights,07-09,22,Harness 工程化
+RSI 论文,DREAM-RSI：用历史搜索改进探索,酸菜鱼吃鱼,09-17,17,Dream-RSI
+self-evolving agent,索引会自己进化了！,ncwr,09-20,18,Self-INDEX
+RSI 论文,AI教父Hinton首篇RSI论文炸场,AI先行者,1小时前,16,Hinton RSI 论文（热度上升中）
+self-evolving agent,EvoOntology：让数据Agent真正读懂数据,王哥儿,5天前,16,EvoOntology
+world model 自我进化,大模型自我进化的RSI飞轮已经转起来了？,阿里云开发者,09-25,14,RSI 飞轮产业观察
+递归自我改进,RSI研讨会笔记：AI自我改进8个结论,NICE学术,昨天,13,ICLR RSI workshop 笔记
+递归自我改进,一读懂RSI：AI自我改进会带来智能爆炸吗？,Damon的大模型实践,6天前,9,智能爆炸讨论
+self-improving agent,ICML26｜让 agent 的记忆架构也能进化,瑾瑾,3小时前,9,记忆架构进化
+递归自我改进,自我改进的 AI Agent，安全漏洞居然会遗传,脑力榨汁机,昨天,8,安全（唯一高相关安全帖）
+self-improving agent,学自进化Agent别走弯路，斯坦福在教这门课,姜无维AI,09-08,7,课程解读
+AI 自我进化,AI开始自我进化，普通人需要知道的RSI,登月者柯里昂,09-18,6,科普
+RSI 论文,按照hinton关于RSI的论文，只会更加紧缺,momo,2小时前,5,Hinton 论文评论
+world model 自我进化,LLM自我进化挑战模糊目标,ncwr,09-04,3,Aspire
+world model 自我进化,Motus2—会“自我进化”的灵巧机器人世界模型,牛码,09-26,3,Motus2
