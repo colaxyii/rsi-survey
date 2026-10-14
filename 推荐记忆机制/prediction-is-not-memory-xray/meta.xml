@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/wFRD5B8dt2yo++AFfwK5LynQJIw</id>
+  <title>arXiv Query: search_query=&amp;id_list=2607.24798&amp;start=0&amp;max_results=10</title>
+  <updated>2026-10-05T08:00:49Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=2607.24798" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2607.24798v1</id>
+    <title>Prediction Is Not Memory: Dual-Timescale Gated Profile Writing for Persistent User Modeling</title>
+    <updated>2026-07-03T14:49:15Z</updated>
+    <link href="https://arxiv.org/abs/2607.24798v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2607.24798v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Persistent user profiles increasingly serve as reusable memory in recommender systems, but common update pipelines conflate two decisions: predicting an interaction and deciding whether it should persist in the profile. After an interaction is observed, many systems treat it as evidence for updating durable user state. This assumption can be harmful when the event reflects transient context, exploration, exposure, or short-term satisfaction rather than stable preference formation. We formulate this boundary as selective profile-write control: after an observed interaction, a system should decide whether, and how strongly, to write it into the persistent profile. We introduce a chronological near/far offline protocol in which near-future evidence provides weak write-risk supervision and far-future evidence is reserved for evaluation. We instantiate the controller as SPW-Gate, a lightweight write-risk gate using long-term, short-term, and candidate-profile drift features. On MicroLens-100K, write-all updating hurts far-future profile alignment in 22.45% of test cases under the main protocol. SPW-Gate reduces far hurt to about 14.5% while preserving about 77% write coverage. Matched-coverage controls and prediction-confidence baselines show that the gain is not merely a by-product of writing less, and that next-item confidence is not a sufficient proxy for persistent write validity.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-07-03T14:49:15Z</published>
+    <arxiv:comment>9 pages, 5 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Ziyide Li</name>
+    </author>
+  </entry>
+</feed>

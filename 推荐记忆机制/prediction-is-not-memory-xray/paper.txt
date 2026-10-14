@@ -1,0 +1,796 @@
+
+===== PAGE 1 =====
+Prediction Is Not Memory: Dual-Timescale Gated Profile Writing for Persistent
+User Modeling
+Ziyide Li
+School of Data Science and Intelligent Media
+Communication University of China
+202313103009@cuc.edu.cn
+Abstract
+Persistent user profiles increasingly serve as reusable mem-
+ory in recommender systems, but common update pipelines
+conflatetwodecisions:predictinganinteractionanddeciding
+whether it should persist in the profile. After an interaction
+is observed, many systems treat it as evidence for updating
+durable user state. This assumption can be harmful when
+the event reflects transient context, exploration, exposure, or
+short-term satisfaction rather than stable preference forma-
+tion. We formulate this boundary asselective profile-write
+control: after an observed interaction, a system should de-
+cide whether, and how strongly, to write it into the persistent
+profile. We introduce a chronological near/far offline proto-
+col in which near-future evidence provides weak write-risk
+supervision and far-future evidence is reserved for evalua-
+tion.WeinstantiatethecontrollerasSPW-Gate,alightweight
+write-risk gate using long-term, short-term, and candidate-
+profiledriftfeatures.OnMicroLens-100K,write-allupdating
+hurts far-future profile alignment in 22.45% of test cases un-
+der the main protocol. SPW-Gate reduces far hurt to about
+14.5%whilepreservingabout77%writecoverage.Matched-
+coverage controls and prediction-confidence baselines show
+that the gain is not merely a by-product of writing less, and
+thatnext-itemconfidenceisnotasufficientproxyforpersistent
+write validity.
+Introduction
+Modernrecommendersystemsincreasinglyoperateasstate-
+ful personalization pipelines rather than isolated next-item
+predictors. Established sequential and interest-evolution
+models update user representations from interaction histo-
+ries and candidate-aware interests (Hidasi et al. 2016; Kang
+andMcAuley2018;Sunetal.2019;Zhouetal.2018,2019).
+Recent industrial and profile-oriented work extends this di-
+rection to long, heterogeneous, and non-stationary behavior
+streams, explicit user profiles, and longer-term user objec-
+tives (Zhai et al. 2024; Si et al. 2024; Feng et al. 2024; Han
+et al. 2025; Zhou, Dai, and Joachims 2024; Gao et al. 2024;
+Liu et al. 2024; Wang et al. 2023). Together, these develop-
+ments mark a shift from one-step recommendation toward
+systems that maintain user state over time.
+This progress has made user modeling more expressive.
+Modern sequence models can attend to longer histories,
+profile-based methods can compress behavior into inter-
+pretable summaries, and long-term-objective models can
+move beyond immediate engagement. Yet many pipelines
+still share an implicit update assumption: once a user in-
+teracts with an item, the event becomes useful evidence for
+updating the user representation. That assumption is natural
+for short-term prediction, where fresh behavior can improve
+immediate relevance. It is less reliable for persistent profile
+writing, where the same update may shape later retrieval,
+ranking, explanation, and user understanding.
+The missing boundary is therefore a pipeline-level deci-
+sion boundary, not simply a need for another ranking ar-
+chitecture. Interaction prediction and profile persistence are
+distinct decisions, but update pipelines often couple them.
+Prediction asks whether an interaction will occur. Persis-
+tence asks whether that interaction should modify durable
+user memory. Work on implicit-feedback denoising and ro-
+bust recommendation shows that observed interactions may
+contain false positives, hard samples, exposure effects, and
+otherunreliablesignals(Wangetal.2021,2022;Song,Chao,
+and Liu 2024; Liu et al. 2025). As training examples, these
+eventsarenoisypositives.Oncecommittedtoaprofilestore,
+they can distort the durable representation. A short-term re-
+sponse, exploratory action, trend-driven exposure, or mo-
+mentarysatisfactionmaythenbewrittenasstablepreference
+formation.
+ThisdistinctionisconsistentwithrecentworkonAIlong-
+term memory and brain-inspired learning, which revisits
+the separation between transient context and durable mem-
+ory (He et al. 2024; Kabir, Mochizuki-Freeman, and Tiganj
+2025).Wedonotclaimtoimplementacognitivearchitecture.
+Instead,thefast-responseversusdurable-memorydistinction
+motivatesasystemboundaryforrecommendation:notevery
+short-term response should be consolidated into persistent
+user memory.
+We study this boundary asselective profile-write control.
+Afteraninteractionisobserved,shoulditbewrittenintothe
+persistent profile, and if so, how strongly? This formulation
+imposes two requirements. First, the write decision must be
+learned without using the future evidence by which it will
+later be judged. We therefore use a chronological near/far
+protocol, where the near future provides weak supervision
+andthefarfutureisreservedforevaluation.Second,thecon-
+trollermustidentifycaseswhereacandidateissupportedby
+transient context but weakly supported by the durable pro-
+file.Itsfeaturesshouldthereforeexposelong-termevidence,
+arXiv:2607.24798v1  [cs.IR]  3 Jul 2026
+
+===== PAGE 2 =====
+short-term evidence, and candidate-profile drift.
+We proposeSelective Profile-Write Gate(SPW-Gate), a
+lightweight write-risk controller placed before the persistent
+profile update. SPW-Gate scores each candidate interaction
+using decision-time features from the long-term profile, the
+recent short-term profile, and their drift. Validation-selected
+thresholds convert the risk score into a write weight. We in-
+stantiatethescorerwithlogisticregressionandasmallMLP,
+denoted SPW-Gate-LR and SPW-Gate-MLP. These models
+arenotrecommendationbackbones;theyarelightweightim-
+plementations of the profile-write controller.
+On MicroLens-100K (Ni et al. 2023), write-all updat-
+ing can be harmful. Under the mainnear1_far1pro-
+tocol, it hurts far-future profile alignment in 22.45% of
+test cases. SPW-Gate reduces this hurt to approximately
+14.5% while preserving approximately 77% write cover-
+age. Matched-coverage controls show that the improvement
+is not simply a consequence of writing fewer candidates.
+Prediction-confidence baselines derived from GRU, SAS-
+Rec,andBERT4Rec(Hidasietal.2016;KangandMcAuley
+2018; Sun et al. 2019) are near-random for identifying write
+risk,whereasdirectwrite-riskgatesprovideastrongersignal.
+Theseresultssupportthecentralclaimthatpredictionconfi-
+denceisnotasufficientsubstituteforpersistentprofile-write
+validity.
+The contributions are therefore deliberately scoped:
+•Weformulatepost-interactionprofilewritingasaseparate
+control problem from next-item prediction.
+•Weintroduceachronologicalnear/farofflineprotocolfor
+detecting harmful persistent writes without using the far
+future as model input.
+•We show that a lightweight SPW-Gate reduces far-future
+profile hurt under substantial write coverage, with fixed-
+coverage controls against the explanation that it only
+writes less.
+•We provide mismatch evidence that ranking confidence
+and persistent write validity are related but not inter-
+changeable.
+Related Work
+Sequential Recommendation and User State
+Sequential recommendation models infer a user’s next ac-
+tion from historical interactions. Recurrent models such as
+GRU4Rec (Hidasi et al. 2016), self-attentive models such as
+SASRec (Kang and McAuley 2018), and bidirectional se-
+quencemodelssuchasBERT4Rec(Sunetal.2019)improve
+temporal user-state representation. Interest-network models
+such as DIN and DIEN (Zhou et al. 2018, 2019) further
+emphasize target-aware or evolving interests. These models
+primarilyoptimizepredictionorranking:givenahistoryand
+acandidateoritemset,estimatefutureinteractionlikelihood.
+Our problem is complementary. We do not ask whether
+a sequence model can predict a candidate interaction. We
+ask whether an observed candidate should be committed to
+a persistent profile. This post-interaction write decision can
+use prediction models as signals, but it is evaluated by the
+candidate’seffectonlaterprofilealignment.Theexperiments
+therefore include ranking-confidence baselines, while keep-
+ing the main method as a profile-write controller rather than
+a ranking model.
+Implicit Feedback Noise and Robust
+Recommendation
+Implicit feedback is noisy (Wang et al. 2021, 2022). Prior
+work studies denoising implicit signals, robust training, and
+cross-model agreement for recommendation (Wang et al.
+2021,2022;Song,Chao,andLiu2024).Suchworktypically
+aimstolearnbetterrecommendersfromnoisyobservedinter-
+actions.Selectiveprofile-writecontrolfocusesonanarrower
+system boundary: after an interaction is observed, should
+it be allowed to modify a durable user representation? This
+boundarymattersbecauseapersistentprofilecanaffectmany
+later components beyond the immediate ranking objective.
+Persistent Profiles as Memory
+Persistent profiles serve as system memory (Zhou, Dai, and
+Joachims 2024; Gao et al. 2024). They compress histori-
+cal behavior into a reusable representation (Zhou, Dai, and
+Joachims 2024; Gao et al. 2024). Memory, however, has a
+different failure mode from prediction (Liu et al. 2024). A
+modelmaycorrectlypredictashort-termactionandstilldis-
+tort the durable profile if that action is not representative of
+futureinterests(Wangetal.2021,2022;Liuetal.2024).We
+operationalize this distinction through a near/far split: near-
+future labels are used to learn write risk, while far-future
+alignment is reserved for evaluating the profile update.
+Problem Formulation
+Profile-Write Decision
+Foreachuseru,letH u = (i1, . . . , it)bethehistoricalinter-
+actionsbeforeanobservedcandidateitemc u.LetN u denote
+a near-future set andFu denote a later far-future set. The
+chronological order is:
+Hu →c u →N u →F u.
+ThemodelobservesH uandc uatwritetime.Itmayuselabels
+derived fromNu during training and validation. It must not
+useF u formodelselectionordecision-timefeatures.Thefar
+future is used only for evaluation.
+Each item has multimodal representations. For a set of
+itemsS, the profile representationp(S)is the normalized
+mean item representation, averaged across available modal-
+ities. The base profile isp(Hu). A write policy produces a
+candidate weightwu ∈[0,1], yielding an updated profile:
+p′
+u(wu) = norm
+ |Hu| ·¯e(Hu) +w ue(cu)
+|Hu|+w u
+
+,
+where¯e(Hu)is the unnormalized mean history embedding
+ande(c u)isthecandidateembedding.Abinarywritepolicy
+is a special case withwu ∈ {0,1}.
+
+===== PAGE 3 =====
+Alignment, Hurt, and Coverage
+LetA(p, S)be the mean cosine alignment between profile
+pand the profile representation of a future setS, averaged
+across modalities. The far-future update is harmful when:
+A(p′
+u(wu), Fu)< A(p(H u), Fu).
+Thefarhurtrateisthefractionofusersforwhichthiscondi-
+tion holds. Thefar alignmentis the averageA(p′
+u(wu), Fu).
+Thewrite coverageis the fraction of candidates assigned
+nonzero write weight. Themean weightis the averagewu.
+These metrics must be read together. A no-update policy
+has zero hurt by construction, but it also has zero write cov-
+erage and lower far alignment. Conversely, write-all has full
+coverage but can write harmful interactions. A useful policy
+shouldreducefarhurtwhilepreservingenoughcoverageand
+alignment to remain a meaningful profile writer.
+Near-Future Write-Risk Label
+We define a near-future write-risk label from the near win-
+dow:
+ynear
+u =1[A(p ′
+u(1), Nu)< A(p(H u), Nu)].
+This label indicates whether writing the candidate appears
+harmful with respect to the near future. SPW-Gate predicts
+this label from decision-time features. Final evaluation uses
+far-futurealignmentandfarhurt.Theprotocolthereforetests
+whether near write-risk supervision transfers to later profile
+validity.
+Selective Profile-Write Gate
+Decision-Time Features
+SPW-Gateusesacompactsetoffeaturesavailablebeforethe
+persistent write:
+•log history length, which captures how much evidence
+the current profile contains;
+•candidate-longsimilarity,thesimilaritybetweenthecan-
+didate and the full historical profile;
+•candidate-shortsimilarity,thesimilaritybetweenthecan-
+didate and the recent short-term profile;
+•long-short similarity, measuring drift between durable
+and recent interests;
+•short-to-long similarity gap, measuring whether the can-
+didateismorealignedwithrecentcontextthanwithlong-
+term history.
+Thesefeaturesencodeasimpleriskpattern:acandidatemay
+be supported by recent context but weakly grounded in the
+durable profile.
+Risk Scoring and Write Policy
+Given feature vectorxu, SPW-Gate estimates a write-risk
+scorer u =g(x u). We instantiategwith two lightweight
+scorers:
+•SPW-Gate-LR: logistic regression with standardized
+features and class-balanced training.
+•SPW-Gate-MLP:atwo-layerMLPwithhiddensizes32
+and 16.
+For each scorer, a validation search chooses a risk threshold
+τand reduced write weightλ. The policy is:
+wu =
+
+λ, r u ≥τ,
+1, r u < τ.
+In the main selected policies,λis often zero, so the con-
+troller behaves as a selective write/block gate. We retain the
+weighted formulation because the profile update rule also
+supports partial writes.
+Baselines
+We compare against four groups of baselines.Degener-
+ate referencesinclude no-update and write-all. They de-
+fine the two extremes of the control space.Classic up-
+date baselinesinclude constant candidate weights, sliding
+windows, and time-decay updates. These test whether sim-
+ple profile-maintenance heuristics are sufficient.Matched
+random policieswrite a random subset at the same cov-
+erage or downweighting rate as learned gates. These di-
+rectly test whether learned selection matters beyond writ-
+ing less.Prediction-confidence baselinesuse popularity,
+Markov transition scores, and candidate logits from GRU,
+SASRec, and BERT4Rec rankers. These test whether next-
+item confidence can substitute for write-risk estimation.
+Experiments
+Dataset and Protocol
+WeevaluateonMicroLens-100K(Nietal.2023),acontent-
+driven micro-video recommendation dataset. The processed
+datacontains705,174interactions,98,129users,and17,228
+items. The mean, median, 90th percentile, and maximum
+sequencelengthsare7.19,6,11,and203,respectively.Each
+itemhasmultimodalfeatures.Wecomputeprofilealignment
+by averaging cosine alignment over text, image, and video
+item representations.
+The main protocol isnear1_far1. It contains 58,194
+eligible user samples after excluding users without the re-
+quiredfuturewindows.Thenear-riskpositiverateis0.2144,
+the full-sample write-all far-hurt rate is 0.2200, and near/far
+labelagreementis0.7096.Theprotocolhasnonear/farover-
+lap cases or time-order violations. We use three user-level
+split seeds: 20260620, 20260621, and 20260622. Policy se-
+lection uses validation near-future metrics; reported main
+results are test averages.
+Wealsoreportrobustnessonnext_one,near1_far3,
+andnear2_far1. Thenext_onehorizon is diagnostic
+because its near and far endpoints coincide. The main claim
+relies on the chronologicalnear1_far1protocol.
+Evaluation Questions
+The experiments are organized around five questions:
+•Q1:Doeswrite-allprofileupdatingcausemeasurablefar-
+future hurt?
+•Q2:CanSPW-Gatereducefarhurtwhileretainingmean-
+ingful write coverage and alignment?
+•Q3: Is the result more than a side effect of writing fewer
+candidates?
+
+===== PAGE 4 =====
+0.0 0.2 0.4 0.6 0.8 1.0
+Mean write weight
+0
+5
+10
+15
+20
+25Far hurt (%) Constant 0.25
+Constant 0.50
+Constant 0.75
+No update
+Write all
+Heuristic
+SPW-LRSPW-MLP
+Matched random
+a Main write-control tradeoff
+70 75 80 85 90 95
+Target coverage (%)
+12
+14
+16
+18
+20Far hurt (%)
+Random
+Heuristic
+SPW-LR
+SPW-MLP
+b Fixed-coverage control
+Figure 1: Main risk-utility tradeoff onnear1_far1. Far
+hurt is plotted against mean write weight; error bars denote
+standard deviation across the three user-level split seeds.
+•Q4:Canpredictionconfidencereplacewrite-riskestima-
+tion?
+•Q5: Does selective writing contradict independent far-
+future retrieval utility?
+Main Write-Control Results
+Table1reportsthemainnear1_far1write-controlresults.
+Thetableshouldnotbereadasasingle-columnleaderboard
+over far hurt. No-update has zero hurt only because it writes
+nothing, and it loses 0.0089 absolute far alignment relative
+towrite-all.Constantweights0.25and0.50alsoreducehurt
+by uniformly weakening every candidate update; they are
+useful attenuation baselines, but they do not decide which
+interactions should enter persistent memory.
+The main comparison is therefore among non-degenerate
+policieswithcomparablememorystrength.Write-allreaches
+the highest far alignment, 0.7537, but also produces 22.45%
+far hurt. SPW-Gate-LR and SPW-Gate-MLP reduce far hurt
+to 14.71% and 14.54%, while retaining roughly 78% and
+77% write coverage. At similar write strength, matched ran-
+domwritinghas17.47%farhurtandtheconstant-0.75base-
+line has 17.62% far hurt. SPW-Gate therefore improves the
+risk-utility tradeoff by selecting safer writes, not merely by
+applying a global attenuation factor.
+Figure 1 visualizes the same comparison. The useful re-
+gion is the middle of the plot: write-all sits at full update
+strength but high hurt, no-update sits at zero hurt but zero
+memorywriting,andSPW-Gateoccupiesaselectiveoperat-
+ingpointwithmuchlowerhurtandnearwrite-allalignment.
+Classic Profile-Update Baselines
+Classicprofile-maintenancerulesprovideadditionalcontext.
+The constant-weight baselines in Table 1 and Figure 1 show
+thatuniformweakeningcanreducehurt,butthiscomeswith
+adifferentinterpretationfromselectivewriting.Weight0.25
+reaches 10.01% hurt, yet it keeps only a quarter-strength
+candidate update and far alignment drops to 0.7491. Weight
+0.50 reaches 13.63% hurt, but still applies the same half-
+strength update to every interaction rather than identifying
+which interactions should persist. Weight 0.75 is closer to
+SPW-Gate’s mean weight and has 17.62% hurt, worse than
+both SPW-Gate variants.
+Sliding-window and time-decay updates are less effec-
+tive in this protocol. Last-5 sliding window reaches 33.44%
+hurt; 30-day time decay reaches 44.95%; last-3 sliding win-
+dowreaches49.86%;and7-daytimedecayreaches73.76%.
+These results suggest that recency alone is not a sufficient
+memoryrule.Thecentralquestionisnotonlyhowrecentthe
+memory should be, but whether the candidate interaction is
+safe to write into the persistent profile at all.
+Non-Degeneracy and Fixed-Coverage Pareto
+The main table alone does not establish non-degeneracy,
+because any conservative policy can lower hurt by writing
+less.Wethereforerunfixed-coveragecontrols.Ateachtarget
+coverage, the learned gates and random controls write the
+samefractionofcandidates,afterwhichwerecomputeexact
+far-future profile alignment.
+Table2reportsfarhurtat70%,80%,and90%targetcov-
+erage. SPW-Gate-LR and SPW-Gate-MLP are consistently
+below random writing at the same coverage, and also be-
+low the heuristic gate. This addresses the main alternative
+explanation: the learned gate is not only suppressing writes;
+it ranks candidate writes by risk well enough to select safer
+interactions under the same write budget.
+Figure 2 shows the corresponding fixed-coverage curves.
+Asthetargetcoverageincreases,farhurtrisesforallmethods,
+but the learned gates remain below random and heuristic
+controls across the evaluated coverage range.
+Prediction-Persistence Mismatch
+Wenexttestwhetherpredictionconfidencecanreplacewrite-
+risk estimation. Table 3 reports two diagnostics. Risk AUC
+measures how well a score orders candidates by the near-
+future write-risk label. Top-decile far hurt measures the ac-
+tualfar-futurehurtrateamongthe10%highest-scoredcandi-
+dates. A useful write-risk score should exceed random AUC
+and concentrate harmful writes in its high-risk decile.
+Direct write-risk gates reach AUC around 0.62. Their
+top-risk deciles have far hurt around 0.39–0.41, compared
+with the overall write-all far-hurt rate of 0.2245. In contrast,
+Markov and popularity confidence are weak, and candidate
+ranking logits from GRU, SASRec, and BERT4Rec rankers
+remainclosetorandomAUC.Thissupportsthepaper’score
+distinction: a score that helps predict the next item is not
+automatically a score that tells the profile store whether the
+interaction should become memory.
+Figure 3 visualizes the same pattern. Direct write-risk
+scoresareabovetherandom-AUCreferenceandconcentrate
+farhurtinthetopdecile,whereasranking-confidencescores
+stay near chance and only weakly separate harmful writes.
+
+===== PAGE 5 =====
+Method Far Hurt Far Align. Mean Weight Coverage Benefit Ret.
+No update 0.0000 0.7448 0.0000 0.0000 0.0000
+Constant weight 0.25 0.1001 0.7491 0.2500 1.0000 0.3673
+Constant weight 0.50 0.1363 0.7518 0.5000 1.0000 1.0000
+Constant weight 0.75 0.1762 0.7532 0.7500 1.0000 1.0000
+Random matched 0.1747 0.7517 0.7810 0.7810 0.7818
+Heuristic gate 0.1905 0.7532 0.8961 0.8961 0.9099
+SPW-Gate-LR0.1471 0.7531 0.7784 0.7784 0.8140
+SPW-Gate-MLP0.1454 0.7530 0.7745 0.7745 0.8110
+Write all 0.2245 0.7537 1.0000 1.0000 1.0000
+Table 1: Main write-control results onnear1_far1. Constant-weight rows write every candidate with the same fractional
+strength; thus their coverage is 1.0 and mean weight captures update strength. No-update is a degenerate reference, not a usable
+memory policy.
+Method 70% Cov. 80% Cov. 90% Cov.
+Random 0.1604 0.1786 0.2016
+Heuristic 0.1382 0.1642 0.1929
+SPW-LR 0.1273 0.1526 0.1817
+SPW-MLP 0.1279 0.1532 0.1832
+Table 2: Far hurt at fixed target coverage onnear1_far1.
+Learned gates outperform random writing under the same
+write budget.
+Sequence Gates as Task-Adapted Comparisons
+The neural write-risk rows in Table 3 use GRU, SASRec,
+and BERT4Rec-style sequence encoders trained directly for
+the write-risk label. They should be separated from the
+ranking-confidence rows, which reuse candidate logits from
+next-item rankers. Under selected write-control policies on
+near1_far1, the SASRec write-risk gate reaches 15.03%
+far hurt, BERT4Rec reaches 15.27%, GRU with state aug-
+mentation reaches 15.88%, and the GRU sequence gate
+reaches 16.84%. All reduce hurt relative to write-all.
+This comparison clarifies the role of sequence models.
+Whenthesamemodelfamilyistrainedfornext-itemranking,
+its candidate logit is a weak write-risk signal. When trained
+directlyforwriterisk,asequenceencodercanbecomeavalid
+write controller. The lightweight SPW-Gate variants remain
+competitive with these task-adapted sequence gates, so the
+main effect in this offline proxy does not require a heavy
+sequence backbone.
+Horizon Robustness
+Table 4 reports far hurt across additional horizons. The
+learned gates remain below write-all across all reported set-
+tings. The effect is strongest and most interpretable in the
+chronologicalnear1_far1protocol, which is the main
+setting. Thenext_onehorizon is diagnostic because its
+near and far endpoints coincide; it does not test temporal
+transfer.
+Figure 4 is the visual counterpart of Table 4. The shaded
+region marks the main protocol, and the error bars show
+variation across the three user-level split seeds.
+0.0 0.2 0.4 0.6 0.8 1.0
+Mean write weight
+0
+5
+10
+15
+20
+25Far hurt (%) Constant 0.25
+Constant 0.50
+Constant 0.75
+No update
+Write all
+Heuristic
+SPW-LRSPW-MLP
+Matched random
+a Main write-control tradeoff
+70 75 80 85 90 95
+Target coverage (%)
+12
+14
+16
+18
+20Far hurt (%)
+Random
+Heuristic
+SPW-LR
+SPW-MLP
+b Fixed-coverage control
+Figure 2: Fixed-coverage control onnear1_far1. Error
+bars denote standard deviation across the three user-level
+split seeds.
+Full-Catalog Retrieval Compatibility
+Wealsoevaluatewhetherselectivewritingiscompatiblewith
+far-futureretrievaloverthefullMicroLensitemcatalog.The
+updated profile is used as a query; far-future items are posi-
+tives; history items and the observed candidate are masked.
+This experiment is a compatibility check, not evidence that
+SPW-Gate improves a production ranking stack.
+Retrieval metrics are close across non-degenerate write
+policies. Recall@10 is 0.02585 for write-all, 0.02591 for
+SPW-Gate-LR, 0.02585 for SPW-Gate-MLP, and 0.02539
+for matched random. No-update is lower at 0.02378.
+NDCG@10 follows a similar pattern: 0.01317 for write-
+all,0.01310forSPW-Gate-LR,0.01299forSPW-Gate-MLP,
+and 0.01293 for matched random. Figure 5 shows these two
+metricswithseed-leveluncertainty.Readconservatively,this
+supports compatibility with the independent retrieval check,
+not a large retrieval gain.
+
+===== PAGE 6 =====
+Source Score Risk AUC Top-Decile Far Hurt Overall Far Hurt
+SPW risk gate MLP write-risk 0.6206 0.4031 0.2245
+SPW risk gate LR write-risk 0.6198 0.4134 0.2245
+Neural write-risk gate SASRec write-risk 0.6204 0.3853 0.2245
+Neural write-risk gate BERT4Rec write-risk 0.6200 0.4037 0.2245
+Neural write-risk gate GRU state-aug. write-risk 0.6027 0.3755 0.2245
+Basic confidence Markov probability 0.5183 0.2795 0.2245
+Basic confidence Popularity probability 0.5140 0.2263 0.2245
+Ranking confidence GRU candidate logit 0.5090 0.2524 0.2245
+Ranking confidence SASRec candidate logit 0.5084 0.2386 0.2245
+Ranking confidence BERT4Rec candidate logit 0.5044 0.2369 0.2245
+Table3:Prediction-persistencemismatchonnear1_far1.Candidatelogitsfromnext-itemrankersareweakwrite-risksignals,
+while direct write-risk gates better identify interactions that later hurt persistent profile alignment.
+0.500 0.525 0.550 0.575 0.600 0.625
+Risk AUC
+BERT4Rec logit
+SASRec logit
+GRU logit
+Popularity
+Markov prob.
+GRU-state risk
+SPW-LR risk
+BERT4Rec risk
+SASRec risk
+SPW-MLP risk
+a Ordering write-risk labels
+20 25 30 35 40
+Top-decile far hurt (%)
+overall
+b Concentrating harmful writes
+Figure 3: Prediction-persistence mismatch onnear1_far1. (a) Risk AUC for near-future write-risk labels. (b) Far hurt in the
+top risk decile. The dashed reference in (b) marks the overall write-all far-hurt rate.
+Horizon All LR MLP Heur.
+next0.2062 0.1373 0.1464 0.1644
+n1-f10.2245 0.1471 0.1454 0.1905
+n1-f30.1409 0.0752 0.0899 0.1062
+n2-f10.2314 0.1455 0.1485 0.1879
+Table 4: Far hurt across horizons. The main claim uses
+near1_far1;otherhorizonsarerobustnessanddiagnostic
+settings.
+Statistical and Calibration Checks
+Finally, we audit the stability and calibration of the se-
+lected write-risk gates. Table 5 summarizes two supporting
+diagnostics onnear1_far1. The first group reports user-
+clusteredbootstrapdifferencesagainstwrite-allover1000re-
+samples. Negative hurt differences indicate lower far-future
+hurt. The second group reports Platt-calibrated risk-score
+quality on the test split.
+Diagnostic SPW-Gate-LR SPW-Gate-MLP
+Hurt diff vs write-all -0.0774 -0.0792
+95% CI [-0.0843, -0.0708] [-0.0861, -0.0720]
+Align. diff vs write-all -0.0006 -0.0007
+Brier 0.1621 0.1617
+Log loss 0.5022 0.5010
+ECE@10 0.0157 0.0089
+ROC-AUC 0.6198 0.6206
+Average precision 0.2990 0.2965
+Table 5: Stability and calibration checks onnear1_far1.
+Hurtandalignmentdifferencesuseauser-clusteredbootstrap
+against write-all; calibration metrics use Platt-calibrated
+write-risk scores.
+The bootstrap intervals support the claim that hurt reduc-
+tion is stable under user-level resampling: SPW-Gate-MLP
+reducesfarhurtby0.0792onaverage,witha95%confidence
+interval from -0.0861 to -0.0720; SPW-Gate-LR reduces far
+
+===== PAGE 7 =====
+next n1-f1 n1-f3 n2-f1
+5.0
+7.5
+10.0
+12.5
+15.0
+17.5
+20.0
+22.5
+25.0Far hurt (%)
+Write all
+Heuristic
+SPW-LR
+SPW-MLP
+main
+Figure4:Farhurtacrosshorizons.Theshadedregionmarks
+themainnear1_far1protocol.Errorbarsdenotestandard
+deviation across three user-level split seeds.
+hurtby0.0774,withanintervalfrom-0.0843to-0.0708.The
+correspondingfar-alignmentdifferencesaresmallandnega-
+tive,-0.0007forSPW-Gate-MLPand-0.0006forSPW-Gate-
+LR, indicating that alignment is approximately maintained
+rather than improved.
+The calibration audit is supporting rather than central.
+Sincethemainmethodusesriskscoresforthresholdedwrite
+control, the primary claim does not require perfectly cali-
+bratedprobabilities.Still,aftervalidation-fittedPlattcalibra-
+tion, both gates obtain similar Brier score, log loss, ROC-
+AUC, and average precision, with SPW-Gate-MLP showing
+the lower ECE@10. This suggests that the write-risk scores
+canbemadereasonablyinterpretablewhencalibrated,while
+the main contribution remains selective write control.
+Limitations and Claim Scope
+This paper makes a bounded claim. Under a MicroLens
+offline near/far proxy, a lightweight selective profile-write
+controller reduces far-future profile hurt while preserving
+substantial write coverage. The results do not establish a
+production recommender improvement, claim state-of-the-
+art ranking, or prove a general theory of long-term human
+preference.
+There are three important limitations. First, the current
+evidenceisfromonedatasetfamily.Futureworkshouldadd
+at least one cross-domain dataset and one exposure-aware
+sequential dataset. Second, the present ranking-confidence
+mismatchusescandidatelogitsfromexistingrankerartifacts,
+not full-catalog confidence features such as rank percentile,
+top-K membership, score entropy, or margin. Third, the cur-
+rent profile update is a one-step candidate write. Multi-step
+persistence, repeated writes, and explicit write/defer/block
+actions remain future work.
+Within this scope, the evidence supports a narrower re-
+searchstory:predictionandmemorywritingshouldbesepa-
+rated,andasmallwrite-riskgatecanactasapracticalcontrol
+layer for persistent user profiles.
+Conclusion
+This paper separates two decisions that are often coupled in
+recommender-system update pipelines: predicting an inter-
+action and deciding whether that interaction should become
+persistentprofilememory.Weformulatedthelatterasselec-
+tiveprofile-writecontrol,introducedanear/farofflineproto-
+col for evaluating harmful persistent writes, and instantiated
+thecontrollerwithalightweightSPW-Gate.Acrossthemain
+MicroLensprotocol,write-allupdatingproducesmeasurable
+far-future profile hurt, while SPW-Gate reduces hurt under
+substantialwritecoverage.Fixed-coveragecontrolsshowthat
+this reduction is not only a consequence of writing fewer
+candidates. Prediction-persistence mismatch results further
+showthatnext-itemconfidenceisaweaksubstitutefordirect
+write-riskestimation.Theclaimisdeliberatelybounded:the
+resultsestablishacredibleofflineproxyforone-stepprofile-
+write control, not a production ranking improvement or a
+complete theory of long-term preference. Within this scope,
+theevidencesupportsapracticaldesignprinciple:persistent
+user memory should have its own write boundary.
+
+===== PAGE 8 =====
+No update
+Matched random
+Write all SPW-LRSPW-MLP
+0.0230
+0.0235
+0.0240
+0.0245
+0.0250
+0.0255
+0.0260
+0.0265Full-catalog retrieval
+a Recall@10
+No update
+Matched random
+Write all SPW-LRSPW-MLP
+0.0118
+0.0120
+0.0122
+0.0124
+0.0126
+0.0128
+0.0130
+0.0132
+0.0134
+b NDCG@10
+Figure 5: Full-catalog far-future retrieval compatibility check onnear1_far1. Panels report Recall@10 and NDCG@10;
+dashed lines mark the write-all reference. Error bars denote standard deviation across three user-level split seeds.
+References
+Feng, Z.; Xie, J.; Li, K.; Qin, Y.; Wang, P.; Li, Q.; Yin,
+B.; Li, X.; Lin, W.; and Wang, S. 2024. Context-Based Fast
+RecommendationStrategyforLongUserBehaviorSequence
+in Meituan Waimai.arXiv preprint arXiv:2403.12566.
+Gao, Z.; Zhou, J.; Dai, Y.; and Joachims, T. 2024. End-
+to-End Training for Recommendation with Language-Based
+User Profiles.arXiv preprint arXiv:2410.18870.
+Han,R.;Yin,B.;Chen,S.;Jiang,H.;Jiang,F.;Li,X.;Ma,C.;
+Huang, M.; Li, X.; Jing, C.; et al. 2025. MTGR: Industrial-
+Scale Generative Recommendation Framework in Meituan.
+arXiv preprint arXiv:2505.18654.
+He, Z.; Lin, W.; Zheng, H.; Zhang, F.; Jones, M. W.; Aitchi-
+son, L.; Xu, X.; Liu, M.; Kristensson, P. O.; and Shen, J.
+2024. Human-Inspired Perspectives: A Survey on AI Long-
+Term Memory.arXiv preprint arXiv:2411.00489.
+Hidasi, B.; Karatzoglou, A.; Baltrunas, L.; and Tikk, D.
+2016. Session-Based Recommendations with Recurrent
+Neural Networks. InInternational Conference on Learning
+Representations.
+Kabir, M. R.; Mochizuki-Freeman, J.; and Tiganj, Z. 2025.
+Deep Reinforcement Learning with Time-Scale Invariant
+Memory. InProceedings of the AAAI Conference on Ar-
+tificial Intelligence.
+Kang, W.-C.; and McAuley, J. 2018. Self-Attentive Sequen-
+tial Recommendation. InProceedings of the IEEE Interna-
+tional Conference on Data Mining.
+Liu, Z.; Liu, S.; Zhang, Z.; Cai, Q.; Zhao, X.; Zhao, K.; Hu,
+L.;Jiang,P.;andGai,K.2024. SequentialRecommendation
+for Optimizing Both Immediate Feedback and Long-term
+Retention. InProceedings of the International ACM SIGIR
+Conference on Research and Development in Information
+Retrieval.
+Liu, Z.; Wang, X.; Liu, S.; Ma, J.; Xu, H.; Han, Y.; Yang,
+Z.; Zhang, K.; Li, L.; and Zhou, J. 2025. CrossDenoise:
+DenoisingImplicitFeedbackviaaLightweightEntity-Aware
+Synergistic Framework.arXiv preprint arXiv:2508.10851.
+Ni, Y.; Cheng, Y.; Liu, X.; Fu, J.; Li, Y.; He, X.;
+Zhang, Y.; and Yuan, F. 2023. A Content-Driven Micro-
+Video Recommendation Dataset at Scale.arXiv preprint
+arXiv:2309.15379.
+Si, Z.; Guan, L.; Sun, Z.; Zang, X.; Lu, J.; Hui, Y.; Cao,
+X.; Yang, Z.; Zheng, Y.; Leng, D.; et al. 2024. TWIN V2:
+Scaling Ultra-Long User Behavior Sequence Modeling for
+EnhancedCTRPredictionatKuaishou.InProceedingsofthe
+ACM International Conference on Information and Knowl-
+edge Management.
+Song, T.; Chao, W.; and Liu, H. 2024. Large Language
+Model Enhanced Hard Sample Identification for Denoising
+Recommendation.arXiv preprint arXiv:2409.10343.
+Sun,F.;Liu,J.;Wu,J.;Pei,C.;Lin,X.;Ou,W.;andJiang,P.
+2019. BERT4Rec: Sequential Recommendation with Bidi-
+rectionalEncoderRepresentationsfromTransformer.InPro-
+ceedings of the ACM International Conference on Informa-
+tion and Knowledge Management.
+Wang, Q.-W.; Lu, H.; Chen, Y.; Zhou, D.-W.; Zhan, D.-C.;
+Chen, M.; and Ye, H.-J. 2023. Streaming CTR Prediction:
+RethinkingRecommendationTaskforReal-WorldStreaming
+Data.arXiv preprint arXiv:2307.07509.
+Wang, W.; Feng, F.; He, X.; Nie, L.; and Chua, T.-S. 2021.
+Denoising Implicit Feedback for Recommendation. InPro-
+ceedings of the ACM International Conference on Web
+Search and Data Mining.
+Wang, Y.; Xin, X.; Meng, Z.; He, X.; Jose, J. M.; and Feng,
+F. 2022. Learning Robust Recommenders through Cross-
+Model Agreement. InProceedings of the Web Conference.
+Zhai,J.;Liao,L.;Liu,X.;Wang,Y.;Li,R.;Cao,X.;Gao,L.;
+Gong,Z.;Gu,F.;He,M.;etal.2024. ActionsSpeakLouder
+than Words: Trillion-Parameter Sequential Transducers for
+Generative Recommendations. InProceedings of the Inter-
+national Conference on Machine Learning.
+
+===== PAGE 9 =====
+Zhou,G.;Mou,N.;Fan,Y.;Pi,Q.;Bian,W.;Zhou,C.;Zhu,
+X.; and Gai, K. 2019. Deep Interest Evolution Network for
+Click-Through Rate Prediction. InProceedings of the AAAI
+Conference on Artificial Intelligence.
+Zhou, G.; Zhu, X.; Song, C.; Fan, Y.; Zhu, H.; Ma, X.; Yan,
+Y.;Jin,J.;Li,H.;andGai,K.2018.DeepInterestNetworkfor
+Click-Through Rate Prediction. InProceedings of the ACM
+SIGKDDInternationalConferenceonKnowledgeDiscovery
+and Data Mining.
+Zhou, J.; Dai, Y.; and Joachims, T. 2024. Language-Based
+User Profiles for Recommendation. InLLM-IGS Workshop
+at WSDM.
